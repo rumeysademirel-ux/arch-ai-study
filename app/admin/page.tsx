@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { listParticipants } from "@/lib/admin-data";
 
+// Bu sayfa participant_code çerezini okumadığı için Next.js'in otomatik
+// dinamik render algısı devreye girmez — açıkça belirtilmezse Vercel'de
+// build anındaki (boş) veriyle statik olarak önbelleğe alınıp donar.
+export const dynamic = "force-dynamic";
+
 const STAGE_LABELS: Record<string, string> = {
   DEMOGRAPHICS: "Demografik",
   MSTAT: "MSTAT-II",

@@ -11,6 +11,9 @@ const TABLE_BY_STAGE: Record<string, string> = {
   revised: "revised_ideas",
 };
 
+// bkz. app/admin/page.tsx — katılımcıya göre değişen ikili veri, önbelleğe alınmamalı.
+export const dynamic = "force-dynamic";
+
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ stage: string; code: string; taskKey: string }> }

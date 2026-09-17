@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getExportRows } from "@/lib/admin-data";
 import { toCsv } from "@/lib/csv";
 
+// bkz. app/admin/page.tsx — her istekte güncel veri gerekiyor, önbelleğe alınmamalı.
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   const format = req.nextUrl.searchParams.get("format") === "json" ? "json" : "csv";
   const rows = await getExportRows();

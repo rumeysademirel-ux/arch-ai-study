@@ -2,6 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getParticipantDetail } from "@/lib/admin-data";
 
+// bkz. app/admin/page.tsx — aynı statik önbellekleme riski burada da geçerli.
+export const dynamic = "force-dynamic";
+
 function prettyJson(raw: string | null): string | null {
   if (!raw) return null;
   try {
