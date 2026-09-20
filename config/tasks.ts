@@ -54,6 +54,16 @@ export const taskB: TaskBrief = {
     "sergilenebileceği veya sunulabileceği farklı kullanım durumlarına olanak sağlaması " +
     "beklenmektedir. Mekân aynı zamanda kısa süreli buluşmalara ve gündelik etkileşimlere de imkân " +
     "vermelidir.",
+  targetUser:
+    "Mekânı tek başlarına veya birlikte üretim yapmak, üretimlerini paylaşmak ve sergilemek için " +
+    "kullanacak kişiler.",
+  keyNeeds: [
+    "Tek başlarına veya birlikte bir şeyler üretebilecekleri alanlar",
+    "Devam eden üretimleri birbirleriyle paylaşabilecekleri alanlar",
+    "Ortaya çıkan çalışmaların geçici olarak sergilenebileceği veya sunulabileceği alanlar",
+    "Kısa süreli buluşmalara ve gündelik etkileşimlere imkân veren alanlar",
+  ],
+  constraints: ["Yaklaşık 150 m² büyüklüğünde, mevcut bir iç mekân"],
   expectedOutput:
     "Tasarımdan, üretim süreci ile ortaya çıkan ürünlerin paylaşılması arasındaki ilişkiyi mekânsal " +
     "olarak ele alması; daha bireysel ve kontrollü kullanımlar ile ortak ve görünür kullanımlar " +
