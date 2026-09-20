@@ -18,9 +18,10 @@ export function buildUserMessage(brief: TaskBrief, ideaTitle: string, ideaDescri
   return [
     `Görev başlığı: ${brief.title}`,
     `Tasarım problemi: ${brief.problem}`,
-    `Hedef kullanıcı: ${brief.targetUser}`,
-    `Temel ihtiyaçlar: ${brief.keyNeeds.join("; ")}`,
-    `Sınırlılıklar: ${brief.constraints.join("; ")}`,
+    ...(brief.targetUser ? [`Hedef kullanıcı: ${brief.targetUser}`] : []),
+    ...(brief.keyNeeds?.length ? [`Temel ihtiyaçlar: ${brief.keyNeeds.join("; ")}`] : []),
+    ...(brief.constraints?.length ? [`Sınırlılıklar: ${brief.constraints.join("; ")}`] : []),
+    `Beklenen çıktı: ${brief.expectedOutput}`,
     ``,
     `Öğrencinin fikir başlığı: ${ideaTitle}`,
     `Öğrencinin fikir açıklaması:`,

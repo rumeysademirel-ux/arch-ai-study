@@ -10,7 +10,7 @@ export default async function InterviewPage() {
       <h1 className="text-xl font-semibold text-foreground">Çalışma Sonrası Görüşme</h1>
       <p className="mt-2 text-sm leading-6 text-muted">
         İki görevde aldığınız geri bildirim deneyimlerini karşılaştırmanızı isteyen kısa açık uçlu
-        sorular yer almaktadır. Yanıtlamak istemediğiniz bir soruyu boş bırakabilirsiniz.
+        sorular yer almaktadır.
       </p>
       <InterviewForm />
     </PageShell>

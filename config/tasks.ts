@@ -1,16 +1,18 @@
-// Etik kurul onaylı Bilgilendirilmiş Onam Formu Eki'nden (Bölüm 2 ve Bölüm 3,
-// "Tasarım Senaryosu" bölümleri) birebir alınmıştır. Bu artık taslak değil —
-// onaylanmış son metindir; değiştirilmesi etik kurul başvurusuyla uyumsuzluk
-// yaratır. `taskKey` değerleri veritabanı kayıtlarında ve fuzzy/AI
-// çağrılarında değişmez tanımlayıcı olarak kullanılır.
+// Görev 1 metni, etik kurul onaylı Onam Formu Eki'nden birebir alınmıştır.
+// Görev 2 metni araştırmacı tarafından revize edilmiştir (Görev 1'in
+// programını yeniden adlandırmamak için "ortak üretim ve paylaşım" senaryosu);
+// onaylı ekteki Görev 2 metninden farklıdır. `taskKey` değerleri veritabanı
+// kayıtlarında ve fuzzy/AI çağrılarında değişmez tanımlayıcı olarak kullanılır.
 
 export interface TaskBrief {
   taskKey: "task-a" | "task-b";
   title: string;
   problem: string;
-  targetUser: string;
-  keyNeeds: string[];
-  constraints: string[];
+  // Aşağıdaki üç alan, onaylı görev metninde ayrı başlıklar yoksa boş bırakılır
+  // ve görev ekranında/AI mesajında hiç gösterilmez.
+  targetUser?: string;
+  keyNeeds?: string[];
+  constraints?: string[];
   expectedOutput: string;
   durationMinutes: number;
 }
@@ -43,27 +45,25 @@ export const taskA: TaskBrief = {
 
 export const taskB: TaskBrief = {
   taskKey: "task-b",
-  title: "Görev 2 — Gençler İçin Ortak Çalışma ve Etkileşim İç Mekânı",
+  title: "Görev 2 — Ortak Üretim ve Paylaşım İç Mekânı",
   problem:
-    "Bir kent merkezinde yer alan mevcut bir yapının yaklaşık 150 m² büyüklüğündeki iç " +
-    "mekânının, genç yetişkinlerin bireysel çalışma, küçük gruplar hâlinde bir araya gelme, " +
-    "kısa süreli dinlenme ve sosyal etkileşim ihtiyaçlarını karşılayacak şekilde yeniden " +
-    "düzenlenmesi istenmektedir.",
-  targetUser: "Kent merkezindeki genç yetişkinler.",
-  keyNeeds: [
-    "Bireysel çalışma alanları",
-    "Küçük grup çalışma ve tartışma alanları",
-    "Kısa süreli dinlenme ve bekleme alanları",
-    "Gündelik sosyal etkileşimi destekleyen ortak kullanım alanları",
-  ],
-  constraints: ["Yaklaşık 150 m² büyüklüğünde, mevcut bir yapının iç mekânı"],
+    "Yaklaşık 150 m² büyüklüğündeki mevcut bir iç mekânın, farklı üretim ve paylaşım biçimlerini " +
+    "destekleyen bir ortak üretim ve paylaşım alanı olarak yeniden düzenlenmesi istenmektedir.\n\n" +
+    "Mekânın, kullanıcıların tek başlarına veya birlikte bir şeyler üretebilecekleri, devam eden " +
+    "üretimleri birbirleriyle paylaşabilecekleri ve ortaya çıkan çalışmaların geçici olarak " +
+    "sergilenebileceği veya sunulabileceği farklı kullanım durumlarına olanak sağlaması " +
+    "beklenmektedir. Mekân aynı zamanda kısa süreli buluşmalara ve gündelik etkileşimlere de imkân " +
+    "vermelidir.",
   expectedOutput:
-    "Tasarımdan, farklı kullanım biçimleri arasında anlamlı mekânsal ilişkiler kurması; " +
-    "bireysel ve ortak kullanım, odaklanma ve sosyalleşme, hareket ve durma gibi farklı " +
-    "ihtiyaçları aynı iç mekân içerisinde birlikte ele alması beklenmektedir. Ayrıntılı " +
-    "uygulama çizimleri, teknik detaylar veya tamamlanmış bir iç mekân projesi geliştirmeniz " +
-    "beklenmemektedir — verilen program doğrultusunda tek bir kavramsal mekânsal yaklaşım " +
-    "geliştirmeniz yeterlidir.",
+    "Tasarımdan, üretim süreci ile ortaya çıkan ürünlerin paylaşılması arasındaki ilişkiyi mekânsal " +
+    "olarak ele alması; daha bireysel ve kontrollü kullanımlar ile ortak ve görünür kullanımlar " +
+    "arasında ilişkiler kurması beklenmektedir. Mekânın farklı zamanlarda üretim, paylaşım, " +
+    "sergileme veya kısa süreli buluşma gibi farklı kullanımlara nasıl cevap verebileceği de " +
+    "tasarım yaklaşımının bir parçası olarak düşünülmelidir.\n\n" +
+    "Bu görev kapsamında ayrıntılı uygulama çizimleri, teknik detaylar veya tamamlanmış bir iç " +
+    "mekân projesi geliştirmeniz beklenmemektedir. Verilen program doğrultusunda temel mekânsal " +
+    "yaklaşımınızı ve kullanıcı deneyimine ilişkin tek bir kavramsal tasarım fikri geliştirmeniz " +
+    "yeterlidir.",
   durationMinutes: 15,
 };
 
