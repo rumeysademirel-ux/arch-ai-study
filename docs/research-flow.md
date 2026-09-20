@@ -4,8 +4,8 @@ Bu doküman, etik kurul onaylı Bilgilendirilmiş Onam Formu Eki ile birebir uyu
 tasarımının (~30 mimarlık öğrencisi, karşı dengelenmiş denek-içi desen, toplam 53 katılımcı
 sorusu + 5 soruluk bağımsız uzman değerlendirmesi, ~50-60 dakika) uçtan uca ekran akışını
 tanımlar. **Şu an kod olarak uygulanan kapsam** (aşağıdaki "Uygulanan akış" bölümü), 2 görevi
-ve karşı dengelemeyi kapsıyor; görev sonu karşılaştırma, görüşme ekranı ve bağımsız uzman
-değerlendirme aracı henüz eklenmedi.
+ve karşı dengelemeyi ile çalışma sonrası yazılı görüşme sorularını kapsıyor; bağımsız uzman
+değerlendirme aracı (Bölüm 5) henüz eklenmedi.
 
 ## Tam akış (hedef sistem)
 
