@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import { NextResponse } from "next/server";
 import { generateFeedback, AI_MODEL_ID } from "@/lib/ai-client";
 
@@ -16,6 +17,10 @@ export async function GET() {
     return NextResponse.json({
       ok: false,
       keyPresent: Boolean(key),
+      keyLength: key?.length ?? 0,
+      keyNonAsciiAt: key ? [...key].map((c, i) => (c.charCodeAt(0) > 126 || c.charCodeAt(0) < 33 ? i : -1)).filter((i) => i >= 0) : [],
+      keySha8: key ? createHash("sha256").update(key).digest("hex").slice(0, 8) : null,
+      otherAnthropicEnv: Object.keys(process.env).filter((k) => k.startsWith("ANTHROPIC_") && k !== "ANTHROPIC_API_KEY"),
       keyLooksValid: Boolean(key?.startsWith("sk-ant-")),
       status: e.status ?? null,
       name: e.name ?? null,
