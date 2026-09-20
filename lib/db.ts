@@ -26,6 +26,17 @@ function toPgPlaceholders(query: string): string {
   return query.replace(/\?/g, () => `$${++i}`);
 }
 
+// Neon zaman damgalarını Date nesnesi olarak döndürür; React bunları doğrudan
+// render edemez (admin sayfası 500 verir). Tüm Date değerleri ISO metnine çevrilir.
+function normalizeRow<T>(row: T): T {
+  if (row && typeof row === "object") {
+    for (const [k, v] of Object.entries(row as Record<string, unknown>)) {
+      if (v instanceof Date) (row as Record<string, unknown>)[k] = v.toISOString();
+    }
+  }
+  return row;
+}
+
 // `prepare(...)` kendi içinde şema migrasyonunun tamamlandığından emin olur;
 // çağıranların ayrıca `getDb()`/migrasyon beklemesi gerekmez — tek `await`
 // yeterli: `await prepare(sql).get(...)`.
@@ -35,11 +46,11 @@ export function prepare(query: string) {
     async get<T = unknown>(...params: unknown[]): Promise<T | undefined> {
       await migrate();
       const rows = (await sql.query(pgQuery, params)) as T[];
-      return rows[0];
+      return rows[0] === undefined ? undefined : normalizeRow(rows[0]);
     },
     async all<T = unknown>(...params: unknown[]): Promise<T[]> {
       await migrate();
-      return (await sql.query(pgQuery, params)) as T[];
+      return ((await sql.query(pgQuery, params)) as T[]).map(normalizeRow);
     },
     async run(...params: unknown[]): Promise<{ changes: number }> {
       await migrate();
