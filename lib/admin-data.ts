@@ -6,6 +6,7 @@ import {
   type CounterbalancingGroup,
 } from "@/config/counterbalancing";
 import { getTaskByKey } from "@/config/tasks";
+import { interviewQuestions } from "@/config/interview-questions";
 
 export interface ParticipantOverview {
   code: string;
@@ -81,6 +82,7 @@ export interface ParticipantDetail {
   demographics: Record<string, string | null> | null;
   mstatScore: { totalScore: number; averageScore: number } | null;
   tasks: TaskDetail[];
+  interview: { questionNumber: number; answer: string }[];
 }
 
 export async function getParticipantDetail(code: string): Promise<ParticipantDetail | null> {
@@ -104,6 +106,11 @@ export async function getParticipantDetail(code: string): Promise<ParticipantDet
   const taskSessions = (await prepare(
     `SELECT task_key, started_at, ended_at FROM task_sessions WHERE participant_code = ?`
   ).all(code)) as { task_key: string; started_at: string; ended_at: string | null }[];
+
+  const interviewRows = (await prepare(
+    `SELECT question_number, answer_text FROM interview_responses
+     WHERE participant_code = ? ORDER BY question_number`
+  ).all(code)) as { question_number: number; answer_text: string }[];
 
   const group: CounterbalancingGroup = isValidGroup(participant.assigned_group)
     ? participant.assigned_group
@@ -248,6 +255,7 @@ export async function getParticipantDetail(code: string): Promise<ParticipantDet
       ? { totalScore: mstatScore.total_score, averageScore: mstatScore.average_score }
       : null,
     tasks,
+    interview: interviewRows.map((r) => ({ questionNumber: r.question_number, answer: r.answer_text })),
   };
 }
 
@@ -280,6 +288,12 @@ export async function getExportRows(): Promise<Record<string, unknown>[]> {
       ai_tools_used: detail.demographics?.ai_tools_used ?? null,
       mstat_total_score: detail.mstatScore?.totalScore ?? null,
       mstat_average_score: detail.mstatScore?.averageScore ?? null,
+      ...Object.fromEntries(
+        interviewQuestions.map((q) => [
+          `interview_q${q.number}`,
+          detail.interview.find((i) => i.questionNumber === q.number)?.answer ?? null,
+        ])
+      ),
     };
 
     if (detail.tasks.length === 0) {

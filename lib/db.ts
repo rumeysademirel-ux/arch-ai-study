@@ -195,6 +195,17 @@ async function runMigration(): Promise<void> {
     )
   `);
 
+  // Çalışma sonrası görüşme protokolü, madde 49-53 (config/interview-questions.ts).
+  await sql.query(`
+    CREATE TABLE IF NOT EXISTS interview_responses (
+      participant_code TEXT NOT NULL REFERENCES participants(code),
+      question_number INTEGER NOT NULL,
+      answer_text TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      PRIMARY KEY (participant_code, question_number)
+    )
+  `);
+
   // Etik kurul onaylı Onam Formu Eki madde 26-32 ile birebir eşleşir (7 madde).
   await sql.query(`
     CREATE TABLE IF NOT EXISTS post_assessments (

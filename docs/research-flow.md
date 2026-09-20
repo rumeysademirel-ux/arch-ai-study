@@ -19,17 +19,17 @@ LOGIN (katılımcı kodu — yazılı onam formu önceden imzalanmış olmalıd�
   → DEMOGRAPHICS (8 madde, ~2-3 dk)
   → MSTAT_II (8 madde, 5'li Likert, Koç/Bir/Özekenci 2021 Türkçe uyarlaması; puan gizli
     hesaplanır, ~4-5 dk)
+  → TASK_INTRO (genel görev açıklaması — config/task-intro-text.ts; ilk görevden önce bir kez)
   → [Görev sırası assigned_group'a göre: Grup 1-4]
     TASK_BRIEF (Görev 1 veya Görev 2 — ~15 dk)
-      → INITIAL_IDEA (immutable)
+      → INITIAL_IDEA (immutable; görev tanımı yazı alanının yanında/üstünde sabit kalır)
       → PRE_FEEDBACK_ASSESSMENT (yön netliği, karar güçlüğü, yönlendirme ihtiyacı — 5'li)
       → AI_FEEDBACK (Standart veya Uyarlanabilir — katılımcıya belirtilmez)
-      → REVISED_IDEA (ilk fikir salt-okunur + ayrı revizyon alanı)
+      → REVISED_IDEA (ilk fikir salt-okunur + yapay zekâ geri bildirimi yanda/üstte sabit + ayrı revizyon alanı)
       → POST_FEEDBACK_ASSESSMENT (7 madde — 5'li)
     BREAK_SCREEN (kısa mola)
     TASK_BRIEF (diğer görev, diğer koşul) → … (yukarıdaki alt akış tekrar)
-  → END_OF_STUDY_COMPARISON (iki geri bildirim deneyimini karşılaştırma) — henüz yok
-  → RESEARCHER_HANDOFF ("Araştırmacıya haber veriniz" + 5 soruluk görüşme rehberi, ~10 dk) — henüz yok
+  → INTERVIEW (çalışma sonrası görüşme protokolü, madde 49-53, açık uçlu yazılı yanıtlar — config/interview-questions.ts; boş bırakılabilir)
   → COMPLETE (teşekkür ekranı)
 ```
 
@@ -43,12 +43,13 @@ Kurallar (tüm aşama):
 ## Uygulanan akış (bu repo'da şu an kod olarak var olan)
 
 ```
-LOGIN → DEMOGRAPHICS → MSTAT
+LOGIN → DEMOGRAPHICS → MSTAT → TASK_INTRO
   → TASK1_BRIEF → TASK1_INITIAL_IDEA → TASK1_PRE_ASSESSMENT → TASK1_AI_FEEDBACK
     → TASK1_REVISED_IDEA → TASK1_POST_ASSESSMENT
   → BREAK (kısa mola ekranı)
   → TASK2_BRIEF → TASK2_INITIAL_IDEA → TASK2_PRE_ASSESSMENT → TASK2_AI_FEEDBACK
     → TASK2_REVISED_IDEA → TASK2_POST_ASSESSMENT
+  → INTERVIEW
   → COMPLETE
 ```
 
@@ -59,8 +60,6 @@ tablosunu birebir uygular. Grup ataması katılımcı kodunu ilk kez girdiğinde
 Grup 1'e, 2. katılımcı Grup 2'ye … 5. katılımcı tekrar Grup 1'e atanır. ~30 katılımcıda hücre
 sayılarını otomatik dengeler.
 
-Kapsam dışı (henüz eklenmedi): görev sonu karşılaştırma ekranı, görüşmeye geçiş ekranı, admin
-paneli.
 
 ## Stage-machine uygulaması
 

@@ -7,6 +7,7 @@ import { isValidGroup, type CounterbalancingGroup, type TaskPosition } from "@/c
 export const STAGE_ORDER = [
   "DEMOGRAPHICS",
   "MSTAT",
+  "TASK_INTRO",
   "TASK1_BRIEF",
   "TASK1_INITIAL_IDEA",
   "TASK1_PRE_ASSESSMENT",
@@ -20,6 +21,7 @@ export const STAGE_ORDER = [
   "TASK2_AI_FEEDBACK",
   "TASK2_REVISED_IDEA",
   "TASK2_POST_ASSESSMENT",
+  "INTERVIEW",
   "COMPLETE",
 ] as const;
 
@@ -28,6 +30,7 @@ export type Stage = (typeof STAGE_ORDER)[number];
 export const STAGE_PATH: Record<Stage, string> = {
   DEMOGRAPHICS: "/demographics",
   MSTAT: "/mstat",
+  TASK_INTRO: "/task-intro",
   TASK1_BRIEF: "/task/1/brief",
   TASK1_INITIAL_IDEA: "/task/1/idea",
   TASK1_PRE_ASSESSMENT: "/task/1/pre-assessment",
@@ -41,6 +44,7 @@ export const STAGE_PATH: Record<Stage, string> = {
   TASK2_AI_FEEDBACK: "/task/2/feedback",
   TASK2_REVISED_IDEA: "/task/2/revise",
   TASK2_POST_ASSESSMENT: "/task/2/post-assessment",
+  INTERVIEW: "/interview",
   COMPLETE: "/complete",
 };
 

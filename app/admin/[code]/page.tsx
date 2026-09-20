@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getParticipantDetail } from "@/lib/admin-data";
+import { interviewQuestions } from "@/config/interview-questions";
 
 // bkz. app/admin/page.tsx — aynı statik önbellekleme riski burada da geçerli.
 export const dynamic = "force-dynamic";
@@ -203,6 +204,29 @@ export default async function ParticipantDetailPage({
           </Section>
         </section>
       ))}
+
+      <section className="mt-8">
+        <h2 className="text-base font-semibold text-foreground">Çalışma Sonrası Görüşme</h2>
+        <Section title="Açık Uçlu Yanıtlar (49-53)">
+          {detail.interview.length > 0 ? (
+            <dl className="space-y-3 text-sm">
+              {interviewQuestions.map((q) => {
+                const answer = detail.interview.find((i) => i.questionNumber === q.number)?.answer;
+                return (
+                  <div key={q.number}>
+                    <dt className="text-muted">
+                      {q.number}. {q.text}
+                    </dt>
+                    <dd className="mt-1 whitespace-pre-line text-foreground">{answer ?? "—"}</dd>
+                  </div>
+                );
+              })}
+            </dl>
+          ) : (
+            <Empty />
+          )}
+        </Section>
+      </section>
     </main>
   );
 }

@@ -9,6 +9,7 @@ export const dynamic = "force-dynamic";
 const STAGE_LABELS: Record<string, string> = {
   DEMOGRAPHICS: "Demografik",
   MSTAT: "MSTAT-II",
+  TASK_INTRO: "Görev Açıklaması",
   TASK1_BRIEF: "Görev 1 — Brief",
   TASK1_INITIAL_IDEA: "Görev 1 — İlk Fikir",
   TASK1_PRE_ASSESSMENT: "Görev 1 — Süreç Değ. (ön)",
@@ -22,6 +23,7 @@ const STAGE_LABELS: Record<string, string> = {
   TASK2_AI_FEEDBACK: "Görev 2 — AI Geri Bildirimi",
   TASK2_REVISED_IDEA: "Görev 2 — Revizyon",
   TASK2_POST_ASSESSMENT: "Görev 2 — Süreç Değ. (son)",
+  INTERVIEW: "Görüşme Soruları",
   COMPLETE: "Tamamlandı",
 };
 
